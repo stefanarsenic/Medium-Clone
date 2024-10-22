@@ -5,14 +5,17 @@ import { routes } from './app.routes';
 import {provideState, provideStore} from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import {authFeatureKey, authReducer} from './auth/store/reducers';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideEffects} from '@ngrx/effects';
 import * as authEffects from './auth/store/effects'
+import * as feedEffects from './shared/components/feed/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store';
+import { authInterceptor } from './shared/services/authInterceptor';
+import { feedFeatureKey, feedReducer } from './shared/components/feed/store/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore({
@@ -21,8 +24,10 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRouterStore(),
     provideState(authFeatureKey, authReducer),
+    provideState(feedFeatureKey, feedReducer),
     provideEffects(
-      authEffects
+      authEffects,
+      feedEffects
     ),
     provideStoreDevtools({
       maxAge: 25,

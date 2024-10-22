@@ -8,6 +8,32 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {PersistanceService} from '../../shared/services/persistance.service';
 import {Router} from '@angular/router';
 
+export const getCurrentUserEffect = createEffect((
+  actions$ = inject(Actions),
+  authService: AuthService = inject(AuthService),
+  persistanceService: PersistanceService = inject(PersistanceService)
+) => {
+  return actions$.pipe(
+    ofType(authActions.getCurrentUser),
+    switchMap(() => {
+      const token = persistanceService.get('token');
+
+      if(!token){
+        return of(authActions.getCurrentUserFailure());
+      }
+      
+      return authService.getCurrentUser().pipe(
+        map((currentUser: CurrentUserInterface) => {
+          return authActions.getCurrentUserSuccess({currentUser});
+        }),
+        catchError((errorResponse: HttpErrorResponse) => {
+          return of(authActions.getCurrentUserFailure());
+        })
+      )
+    })
+  )
+}, {functional: true})
+
 export const registerEffect = createEffect((
   actions$ = inject(Actions),
   authService: AuthService = inject(AuthService),
@@ -19,12 +45,12 @@ export const registerEffect = createEffect((
       return authService.register(request).pipe(
         map((currentUser: CurrentUserInterface) => {
           persistanceService.set('token', currentUser.token);
-          return authActions.registerSuccess({currentUser})
+          return authActions.registerSuccess({currentUser});
         }),
         catchError((errorResponse: HttpErrorResponse) => {
           return of(authActions.registerFailure({
             errors: errorResponse?.error?.errors
-          }))
+          }));
         })
       )
     })
@@ -39,7 +65,7 @@ export const redirectAfterRegisterEffect = createEffect(
     return actions$.pipe(
       ofType(authActions.registerSuccess),
       tap(() => {
-        router.navigateByUrl('/')
+        router.navigateByUrl('/');
       })
     )
   },
@@ -57,12 +83,12 @@ export const loginEffects = createEffect((
       return authService.login(request).pipe(
         map((currentUser: CurrentUserInterface) => {
           persistanceService.set('token', currentUser.token);
-          return authActions.loginSuccess({currentUser})
+          return authActions.loginSuccess({currentUser});
         }),
         catchError((errorResponse: HttpErrorResponse) => {
           return of(authActions.loginFailure({
             errors: errorResponse?.error?.errors
-          }))
+          }));
         })
       )
     })
@@ -77,7 +103,7 @@ export const redirectAfterLoginEffect = createEffect(
     return actions$.pipe(
       ofType(authActions.loginSuccess),
       tap(() => {
-        router.navigateByUrl('/')
+        router.navigateByUrl('/');
       })
     )
   },

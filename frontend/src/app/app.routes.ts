@@ -10,5 +10,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./globalFeed/globalFeed.routes').then((m) => m.routes)
   }
 ];

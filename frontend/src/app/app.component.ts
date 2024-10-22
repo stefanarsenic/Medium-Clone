@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {TopBarComponent} from './shared/components/top-bar/top-bar.component';
+import { authActions } from './auth/store/actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,12 @@ import {TopBarComponent} from './shared/components/top-bar/top-bar.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'frontend';
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(authActions.getCurrentUser());
+  }
 }
