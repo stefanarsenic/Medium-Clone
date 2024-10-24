@@ -1,0 +1,33 @@
+.container {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+    background-color: #007bff;
+    color: white;
+}
