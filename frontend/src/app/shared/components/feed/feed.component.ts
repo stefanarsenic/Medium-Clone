@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { feedActions } from './store/actions';
 import { combineLatest } from 'rxjs';
@@ -19,7 +19,7 @@ import { TagListComponent } from "../tag-list/tag-list.component";
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
-export class FeedComponent implements OnInit{
+export class FeedComponent implements OnInit, OnChanges{
   
   @Input() apiUrl: string = '';
 
@@ -38,6 +38,16 @@ export class FeedComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute
   ){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const apiUrlChanged = 
+    !changes['apiUrl'].firstChange 
+    && changes['apiUrl'].currentValue !== changes['apiUrl'].previousValue;
+
+    if(apiUrlChanged) {
+      this.fetchFeed;
+    }
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {

@@ -1,7 +1,12 @@
 <ng-container *ngIf="data$ | async as data">
-    <div class="container">
+    <app-loading *ngIf="data.isLoading"></app-loading>
+    <app-error-message
+    *ngIf="data.error"
+    [message]="data.error"
+    ></app-error-message>
+    <div class="container" *ngIf="data.tagsData">
         <ul class="tags-list">
-            <li *ngFor="let tag of data.tagsData?.tags" class="tag">{{ tag }}</li>
+            <li *ngFor="let tag of data.tagsData?.tags" class="tag" [routerLink]="['/tags', tag]">{{ tag }}</li>
         </ul>
     </div>
 </ng-container>
