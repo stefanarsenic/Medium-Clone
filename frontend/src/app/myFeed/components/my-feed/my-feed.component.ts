@@ -12,5 +12,5 @@ import { FeedTogglerComponent } from '../../../shared/components/feed-toggler/fe
   styleUrl: './my-feed.component.css'
 })
 export class MyFeedComponent {
-  apiUrl = '/articles';
+  apiUrl = '/articles/feed';
 }

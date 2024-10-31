@@ -1,7 +1,8 @@
-import { GetArticleResponseInterface } from "./getArticleResponse.interface";
+import { ArticleInterface } from "./article.interface";
+import { ArticleResponseInterface } from "./ArticleResponse.interface";
 
 export interface ArticleStateInterface {
     isLoading: boolean,
     error: string | null,
-    data: GetArticleResponseInterface | null
+    data: ArticleInterface | null
 }

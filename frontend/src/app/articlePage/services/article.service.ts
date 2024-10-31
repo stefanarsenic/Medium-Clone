@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { GetArticleResponseInterface } from "../types/getArticleResponse.interface";
+import { ArticleResponseInterface } from "../types/ArticleResponse.interface";
 import { environment } from "../../../environments/environment.development";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
+import { ArticleInterface } from "../types/article.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -11,8 +12,9 @@ export class ArticleService {
 
 	constructor(private http: HttpClient) {}
 
-	getArticle(slug: string): Observable<GetArticleResponseInterface> {
-		const apiUrl = environment.apiUrl;
-		return this.http.get<GetArticleResponseInterface>(`${apiUrl}/articles/${slug}`);
+	getArticle(slug: string): Observable<ArticleInterface> {
+		const fullUrl = `${environment.apiUrl}/articles/${slug}`;
+		return this.http.get<ArticleResponseInterface>(fullUrl)
+		.pipe(map((response) => response.article));
 	}
 }

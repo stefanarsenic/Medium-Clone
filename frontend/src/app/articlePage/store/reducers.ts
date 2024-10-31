@@ -1,6 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { ArticleStateInterface } from "../types/articleState.interface";
-import { state } from "@angular/animations";
 import { articleActions } from "./actions";
 import { routerNavigationAction } from "@ngrx/router-store";
 
@@ -34,5 +33,9 @@ const articleFeature = createFeature({
 });
 
 export const {
-
+	name: articleFeatureKey,
+	reducer: articleReducer,
+	selectIsLoading,
+	selectData: selectArticleData,
+	selectError
 } = articleFeature;

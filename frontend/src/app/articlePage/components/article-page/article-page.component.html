@@ -1,1 +1,28 @@
-<p>article-page works!</p>
+<ng-container *ngIf="data$ | async as data">
+    <div class="article-page">
+        <div class="banner">
+            <div class="container" *ngIf="data.article">
+                <div class="article-heading">
+                    <h1>{{ data.article.title }}</h1>
+                    <div class="author">
+                        <img [src]="data.article.author.image">
+                        <b>{{ data.article.author.username }}</b>
+                    </div>
+                    <span *ngIf="data.isAuthor">
+                        <button class="btn-edit">Edit Article</button>
+                        <button class="btn-delete">Delete Article</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="container page">
+            <app-loading *ngIf="data.isLoading"></app-loading>
+            <app-error-message *ngIf="data.errorResponse"></app-error-message>
+
+            <div class="content" *ngIf="data.article">
+                <p>{{ data.article.body }}</p>
+                <app-tag-list [tags]="data.article.tagList"></app-tag-list>
+            </div>
+        </div>
+    </div>
+</ng-container>

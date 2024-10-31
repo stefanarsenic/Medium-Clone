@@ -18,7 +18,9 @@
                 </a>
                 <span class="date">{{ article.createdAt }}</span>
             </div>
-            <div class="pull-xs right">Add to favorites</div>
+            <div class="pull-xs right" *ngIf="!article.favorited">
+                <button (click)="addToFavorites(article.slug)" class="add-to-favorites">Add to favorites</button>
+            </div>
             <a [routerLink]="['/articles', article.slug]" class="preview-link">
                 <h1>{{article.title}}</h1>
                 <p>{{article.description}}</p>
@@ -28,6 +30,7 @@
             [tags]="article.tagList"
             ></app-tag-list>
         </div>
+
         <app-pagination
         [total]="data.feed.articlesCount"
         [limit]="limit"

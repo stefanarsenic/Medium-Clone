@@ -3,7 +3,8 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ArticleService } from "../services/article.service";
 import { articleActions } from "./actions";
 import { catchError, map, of, switchMap } from "rxjs";
-import { GetArticleResponseInterface } from "../types/getArticleResponse.interface";
+import { ArticleResponseInterface } from "../types/ArticleResponse.interface";
+import { ArticleInterface } from "../types/article.interface";
 
 export const getArticleEffects = createEffect((
   actions$ = inject(Actions),
@@ -13,7 +14,7 @@ export const getArticleEffects = createEffect((
 		ofType(articleActions.getArticle),
 		switchMap(({url}) => {
 			return articleService.getArticle(url).pipe(
-				map((article: GetArticleResponseInterface) => {
+				map((article: ArticleInterface) => {
 					return articleActions.getArticleSuccess({article});
 				}),
 				catchError((errorResponse) => {
@@ -22,4 +23,4 @@ export const getArticleEffects = createEffect((
 			)
 		})
 	);
-});
+}, {functional: true});

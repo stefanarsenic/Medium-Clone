@@ -1,0 +1,52 @@
+.container {
+    max-width: 1024px;
+} 
+
+p {
+    margin-top: 48px;
+}
+
+.article-heading {
+    background-color: slategray;
+    color: white;
+    padding: 48px;
+}
+
+.author {
+    margin-top: 24px;
+}
+
+.author img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.author b {
+    margin-left: 8px;
+}
+
+.author button {
+    margin-left: 8px;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    transition: 0.15s ease-in;
+}
+
+.btn-edit {
+    background-color: transparent;
+    border: 1px solid lightgreen;
+}
+
+.btn-delete {
+    background-color: transparent;
+    border: 1px solid lightcoral;
+}
+
+.btn-edit:hover {
+    background-color: lightgreen;
+}
+
+.btn-delete:hover {
+    background-color: lightcoral;
+}

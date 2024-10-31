@@ -7,6 +7,10 @@
     transition: box-shadow 0.3s ease;
 }
 
+.article-preview a {
+    text-decoration: none;
+}
+
 .article-preview:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
