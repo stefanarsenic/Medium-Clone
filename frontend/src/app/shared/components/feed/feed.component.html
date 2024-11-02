@@ -18,7 +18,7 @@
                 </a>
                 <span class="date">{{ article.createdAt }}</span>
             </div>
-            <div class="pull-xs right" *ngIf="!article.favorited">
+            <div class="pull-xs right">
                 <app-add-to-favorites
                     [isFavorited]="article.favorited"
                     [articleSlug]="article.slug"

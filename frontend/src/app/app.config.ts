@@ -10,10 +10,12 @@ import {provideEffects} from '@ngrx/effects';
 import * as authEffects from './auth/store/effects'
 import * as feedEffects from './shared/components/feed/store/effects'
 import * as tagsEffects from './shared/components/popular-tags/store/effects'
+import * as addToFavoritesEffects from './shared/components/add-to-favorites/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store';
 import { authInterceptor } from './shared/services/authInterceptor';
 import { feedFeatureKey, feedReducer } from './shared/components/feed/store/reducers';
 import { tagsFeatureKey, tagsReducer } from './shared/components/popular-tags/store/reducers';
+import { AddToFavoritesService } from './shared/components/add-to-favorites/services/addToFavorites.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,6 +34,7 @@ export const appConfig: ApplicationConfig = {
       authEffects,
       feedEffects,
       tagsEffects,
+      addToFavoritesEffects
     ),
     provideStoreDevtools({
       maxAge: 25,
@@ -39,5 +42,7 @@ export const appConfig: ApplicationConfig = {
       autoPause: true,
       trace: false,
       traceLimit: 75
-    })]
+    }),
+    AddToFavoritesService
+  ] 
 };
