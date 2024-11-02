@@ -34,11 +34,16 @@ p {
 }
 
 .btn-edit {
+    padding: 4px;
+    border-radius: 5px;
     background-color: transparent;
     border: 1px solid lightgreen;
 }
 
 .btn-delete {
+    padding: 4px;
+    margin-left: 10px;
+    border-radius: 5px;
     background-color: transparent;
     border: 1px solid lightcoral;
 }

@@ -12,11 +12,12 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import queryString from 'query-string';
 import { TagListComponent } from "../tag-list/tag-list.component";
 import { FeedService } from './services/feed.service';
+import { AddToFavoritesComponent } from "../add-to-favorites/add-to-favorites.component";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, PaginationComponent, RouterLink, AsyncPipe, ErrorMessageComponent, LoadingComponent, TagListComponent],
+  imports: [CommonModule, PaginationComponent, RouterLink, AsyncPipe, ErrorMessageComponent, LoadingComponent, TagListComponent, AddToFavoritesComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
@@ -68,9 +69,5 @@ export class FeedComponent implements OnInit, OnChanges{
     }); 
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
     this.store.dispatch(feedActions.getFeed({url: apiUrlWithParams}));
-  }
-
-  addToFavorites(slug: string): void {
-    this.feedService.addToFavorites(slug).subscribe();
   }
 }

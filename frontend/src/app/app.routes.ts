@@ -27,8 +27,23 @@ export const routes: Routes = [
       import('./tagFeed/tagFeed.routes').then((m) => m.routes)
   },
   {
+    path: 'articles/new',
+    loadChildren: () => 
+      import('./createArticle/createArticle.routes').then((m) => m.routes)
+  },
+  {
     path: 'articles/:slug',
     loadChildren: () => 
       import('./articlePage/article-page.routes').then((m) => m.routes)
-  }
+  },
+  {
+    path: 'articles/:slug/edit',
+    loadChildren: () => 
+      import('./editArticle/editArticle.routes').then((m) => m.routes)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => 
+      import('./settings/settings.routes').then((m) => m.routes)
+  },
 ];

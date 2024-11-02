@@ -19,7 +19,12 @@
                 <span class="date">{{ article.createdAt }}</span>
             </div>
             <div class="pull-xs right" *ngIf="!article.favorited">
-                <button (click)="addToFavorites(article.slug)" class="add-to-favorites">Add to favorites</button>
+                <app-add-to-favorites
+                    [isFavorited]="article.favorited"
+                    [articleSlug]="article.slug"
+                    [favoritesCount]="article.favoritesCount"
+                >
+                </app-add-to-favorites>
             </div>
             <a [routerLink]="['/articles', article.slug]" class="preview-link">
                 <h1>{{article.title}}</h1>

@@ -15,7 +15,7 @@ const authFeature = createFeature({
   name: "auth",
   reducer: createReducer(
     initialState,
-
+    //Get Current User
     on(authActions.getCurrentUser, state => ({
       ...state,
       isLoading: true
@@ -30,7 +30,7 @@ const authFeature = createFeature({
       isLoading: false,
       currentUser: null
     })),
-
+    //Register user
     on(authActions.register, state => ({
       ...state,
       isSubmitting: true,
@@ -46,7 +46,7 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: action.errors
     })),
-
+    //Login user
     on(authActions.login, state => ({
       ...state,
       isSubmitting: true,
@@ -62,7 +62,18 @@ const authFeature = createFeature({
       isSubmitting: false,
       validationErrors: action.errors
     })),
-
+    //Update current user (Settings page)
+    on(authActions.updateCurrentUserSuccess, (state, action) => ({
+      ...state,
+      currentUser: action.currentUser
+    })),
+    //logout
+    on(authActions.logout, (state) => ({
+      ...state,
+      ...initialState,
+      currentUser: null
+    })),
+    //Router
     on(routerNavigatedAction, (state) => ({
       ...state,
       validationErrors: null

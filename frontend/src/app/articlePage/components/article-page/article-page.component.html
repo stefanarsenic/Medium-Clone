@@ -9,8 +9,8 @@
                         <b>{{ data.article.author.username }}</b>
                     </div>
                     <span *ngIf="data.isAuthor">
-                        <button class="btn-edit">Edit Article</button>
-                        <button class="btn-delete">Delete Article</button>
+                        <button [routerLink]="['/articles', data.article.slug, 'edit']" class="btn-edit">Edit Article</button>
+                        <button (click)="deleteArticle()" class="btn-delete">Delete Article</button>
                     </span>
                 </div>
             </div>

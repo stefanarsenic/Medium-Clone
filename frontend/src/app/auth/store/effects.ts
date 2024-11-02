@@ -109,3 +109,34 @@ export const redirectAfterLoginEffect = createEffect(
   },
   {functional: true, dispatch: false}
 )
+
+export const updateCurrentUserEffect = createEffect((
+  actions$ = inject(Actions),
+  authService: AuthService = inject(AuthService),
+) => {
+  return actions$.pipe(
+    ofType(authActions.updateCurrentUser),
+    switchMap(({currentUserRequest}) => {
+      return authService.updateCurrentUser(currentUserRequest).pipe(
+        map((currentUser: CurrentUserInterface) => {
+          return authActions.updateCurrentUserSuccess({currentUser});
+        }),
+        catchError((errorResponse: HttpErrorResponse) => {
+          return of(authActions.updateCurrentUserFailure({errors: errorResponse.error}));
+          }));
+        })
+      )}, {functional: true});
+
+export const logoutEffect = createEffect((
+  actions$ = inject(Actions),
+  router = inject(Router),
+  persistanceService: PersistanceService = inject(PersistanceService)
+) => {
+  return actions$.pipe(
+    ofType(authActions.logout),
+    tap(() => {
+      persistanceService.set('token', '');
+      router.navigateByUrl('/');
+    })
+  )
+}, {functional: true, dispatch: false})
