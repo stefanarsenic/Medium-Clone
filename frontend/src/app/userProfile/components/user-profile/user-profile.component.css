@@ -1,0 +1,94 @@
+/* Profile Page Container */
+.profile-page {
+    padding-top: 2rem;
+    background-color: #f9f9f9;
+}
+
+/* User Information Section */
+.user-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.user-info .container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Image Styling */
+.user-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #ddd;
+}
+
+/* Username and Bio Styling */
+h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1rem;
+    color: #777;
+    margin: 0;
+}
+
+/* Follow Button */
+.btn-outline-secondary {
+    color: #666;
+    border-color: #ddd;
+    padding: 0.3rem 1rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    border-radius: 4px;
+}
+
+.btn-outline-secondary:hover {
+    color: #333;
+    border-color: #bbb;
+    background-color: #f3f3f3;
+}
+
+/* Articles Toggle Section */
+.articles-toggler {
+    margin: 2rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.articles-toggler .nav {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Navigation Links */
+.nav-link {
+    font-size: 1rem;
+    color: #666;
+    padding-bottom: 0.5rem;
+}
+
+.nav-link:hover {
+    color: #333;
+}
+
+.nav-link.active {
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+}
+
+/* Feed Component Styling */
+app-feed {
+    margin-top: 2rem;
+}

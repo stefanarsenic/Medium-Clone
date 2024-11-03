@@ -35,7 +35,7 @@ const userProfileFeature = createFeature({
 export const {
     name: userProfileFeatureKey,
     reducer: userProfileReducer,
-    selectData: userProfileData,
+    selectData: selectUserProfileData,
     selectIsLoading,
     selectError
 } = userProfileFeature
